@@ -24,7 +24,7 @@ class CoursesPage extends React.Component {
     onClickSave() {
 //        console.log(this.state);
 //        alert(`Saving ${this.state.course.title}`);
-        this.props.dispatch(courseActions.createCourse(this.state.course));
+        this.props.createCourse(this.state.course);
     }
 
     courseRow(course, index) {
@@ -34,7 +34,6 @@ class CoursesPage extends React.Component {
     }
 
     render() {
-        debugger;
         return (
             <div>
                 <h1>Courses</h1>
@@ -56,8 +55,8 @@ class CoursesPage extends React.Component {
 }
 
 CoursesPage.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    courses: PropTypes.array.isRequired
+    courses: PropTypes.array.isRequired,
+    createCourse: PropTypes.func.isRequired
 };
 
 // instead of 
@@ -66,11 +65,17 @@ CoursesPage.propTypes = {
 // can do this
 
 function mapStateToProps(state, ownProps) {
-    debugger;
     return {
         courses: state.courses          // named as in reducer
     };
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
-export default connect(mapStateToProps)(CoursesPage);  // will add default dispatch property from connect
+function mapDispatchToProps(dispatch) {
+    return {
+        // if only a single parameter, anonymous function can look like this...
+        createCourse: course => dispatch(courseActions.createCourse(course))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+//export default connect(mapStateToProps)(CoursesPage);  // will add default dispatch property from connect
