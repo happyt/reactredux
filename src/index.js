@@ -8,6 +8,6 @@ import './styles/styles.css';  // webpack can import css filters too
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 render(
-    <Router history={browserHistory} routes={routes}></Router>,
+    <Router history={browserHistory} routes={routes} />,
     document.getElementById('app')
 );

@@ -12,3 +12,4 @@ export default (
         <Route path="courses" component={CoursesPage} />
     </Route>
 );
+
