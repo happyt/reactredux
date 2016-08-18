@@ -1,4 +1,7 @@
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import * as courseActions from '../../actions/courseActions';
+
 
 class CoursesPage extends React.Component {
     constructor(props, context) {
@@ -20,7 +23,8 @@ class CoursesPage extends React.Component {
 
     onClickSave() {
 //        console.log(this.state);
-        alert(`Saving ${this.state.course.title}`);
+//        alert(`Saving ${this.state.course.title}`);
+        this.props.dispatch(courseActions.createCourse(this.state.course));
     }
 
     render() {
@@ -43,4 +47,16 @@ class CoursesPage extends React.Component {
     }
 }
 
-export default CoursesPage;
+// instead of 
+// const connStAndPr = connect(mapState, mapDispatch)   returns a function
+// export default connStAndPr(CoursesPage)
+// can do this
+
+function mapStateToProps(state, ownProps) {
+    return {
+        courses: state.courses          // named as in reducer
+    };
+}
+
+// export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default connect(mapStateToProps)(CoursesPage);  // will add default dispatch property from connect
