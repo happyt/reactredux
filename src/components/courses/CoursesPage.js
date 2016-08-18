@@ -27,10 +27,18 @@ class CoursesPage extends React.Component {
         this.props.dispatch(courseActions.createCourse(this.state.course));
     }
 
+    courseRow(course, index) {
+        return (
+            <div key={index}>{course.title}</div>
+        );
+    }
+
     render() {
+        debugger;
         return (
             <div>
                 <h1>Courses</h1>
+                {this.props.courses.map(this.courseRow)}
                 <h2>Add course</h2>
                 <input 
                     type="text"
@@ -47,12 +55,18 @@ class CoursesPage extends React.Component {
     }
 }
 
+CoursesPage.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    courses: PropTypes.array.isRequired
+};
+
 // instead of 
 // const connStAndPr = connect(mapState, mapDispatch)   returns a function
 // export default connStAndPr(CoursesPage)
 // can do this
 
 function mapStateToProps(state, ownProps) {
+    debugger;
     return {
         courses: state.courses          // named as in reducer
     };

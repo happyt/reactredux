@@ -3,7 +3,7 @@ export default function courseReducer(state = [], action) {
         case 'CREATE_COURSE':
             // state.push(action.course);   logically
             // return state;
-            state.push(action.course);
+            debugger;
             return [...state,
                 Object.assign({}, action.course)   // copy state, override course
             ];
